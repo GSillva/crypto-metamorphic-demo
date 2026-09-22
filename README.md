@@ -1,15 +1,12 @@
 # Minimal Cryptographic Metamorphic Testing Demo
 
-Este projeto é uma demonstração didática, mínima, da ideia de
+Este projeto é uma demonstração mínima da ideia de
 **cryptographically-informed metamorphic testing** apresentada em:
 
 > Giacomo Fenzi, Jan Gilcher, Fernando Virdia —
 > *Finding Bugs and Features Using Cryptographically-Informed Functional Testing*
 
-O projeto **não implementa um KEM criptograficamente seguro**. O KEM em
-`src/kem.c` é propositalmente um brinquedo para deixar a ideia fácil de
-apresentar.
-
+O projeto **não implementa um KEM criptograficamente seguro**. 
 ## Ideia
 
 O teste segue uma versão reduzida do fluxo:
@@ -75,27 +72,4 @@ METAMORPHIC VIOLATION: modified ciphertext was accepted
 
 e terminar com código `1`.
 
-No GitHub Actions, isso aparece como um workflow vermelho.
 
-## Relação com o paper
-
-O paper original do Virdia et al. generaliza a ideia de metamorphic testing
-para KEMs e esquemas de assinatura digital. O framework do trabalho separa
-a geração do input (`GenInput`), a execução (`Call`), a mutação (`Maul`) e
-a comparação/verificação (`Match`).
-
-Este projeto reduz essa arquitetura a um único caso:
-
-```text
-Decaps(sk, c)
-      ↓
-    Maul
-      ↓
-Decaps(sk, c')
-      ↓
-    Match
-```
-
-O próximo passo seria substituir o toy KEM por uma implementação real,
-por exemplo através de liboqs, e então introduzir AFL++ para explorar
-automaticamente diferentes mutações.
