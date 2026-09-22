@@ -1,0 +1,23 @@
+name: Cryptographic Metamorphic Test
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  metamorphic-test:
+    name: Build and run metamorphic test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Build
+        run: make
+
+      - name: Run metamorphic test
+        run: make test
